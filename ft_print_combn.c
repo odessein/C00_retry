@@ -84,7 +84,6 @@ int	ft_create_base(int n, int *pow)
 	return (val);
 }
 
-//cas du 1 a part
 void	ft_print_combn(int n)
 {
 	int 	val;

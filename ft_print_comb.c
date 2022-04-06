@@ -13,7 +13,6 @@ void	ft_disp(char a, int c, int c1)
 	write(1, &z, 1);
 	if (a != '7')
 		write(1, ", ", 2);
-	return ;
 }
 
 void	ft_print_comb(void)
@@ -38,7 +37,6 @@ void	ft_print_comb(void)
 			counter = ++counter1;
 		counter++;
 	}
-	return ;
 }
 
 int	main(void)

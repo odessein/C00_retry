@@ -1,6 +1,11 @@
 //Header//
 #include <unistd.h>
 
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
 void	ft_putnbr(int nb)
 {
 	char	buff;
@@ -10,9 +15,8 @@ void	ft_putnbr(int nb)
 		write(1 ,"-", 1);
 		if (nb == -2147483648)
 		{
-			ft_putnbr(214748364);
-			ft_putnbr(8);
-			return ;
+			ft_putchar('2');
+			nb = -147483648;
 		}
 		nb *= -1;
 	}
@@ -21,7 +25,7 @@ void	ft_putnbr(int nb)
 		buff = nb + 48;
 	else
 		ft_putnbr(nb/10);
-	write(1, &buff , 1);
+	ft_putchar(buff);
 }
 
 int	main()
