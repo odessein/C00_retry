@@ -25,7 +25,6 @@ int	ft_check(int line, int col, int arr[10])
 	}
 	while (--i > -1)
 	{
-//		printf("\n l_u : %i, l_d : %i, val %i: %i", l_u, l_d, i, array[i]);
 		if ((arr[i] == l_u && l_u > -1) || (arr[i] == l_d && l_d < 10))
 			return (0);
 		l_d++;
@@ -33,21 +32,20 @@ int	ft_check(int line, int col, int arr[10])
 	}
 	return (1);
 }
-//Function display (witch count too)
 
-void	ft_display(int array[10], int col)
+void	ft_display(int array[10])
 {
 	int	i;
 	char	print;
 
 	i = 0;
-	while (i <= col)
+	while (i < 10)
 	{
-//§		printf("%i \n ", array[i]);
 		print = array[i] + 48;
 		write(1, &print, 1);
 		i++;
 	}
+	write(1, "\n", 1);
 }
 
 int	ft_recursive_check(int array[10], int n, int col, int col_min)
@@ -57,7 +55,8 @@ int	ft_recursive_check(int array[10], int n, int col, int col_min)
 	while (!ft_check(n, col, array))
 	{
 		if (n > 9)
-		{ if (col > col_min)
+		{ 
+			if (col > col_min)
 				return (ft_recursive_check(array, array[col - 1] + 1, col - 1, col_min));
 			else
 				return (0);
@@ -84,8 +83,6 @@ void	ft_insert(int array[10], int n, int col)
 		n++;
 	}
 	array[col] = n;
-//	ft_display(array, col);
-//	write(1, "\n", 1);
 	ft_insert(array, 0, col + 1);
 }
 
@@ -95,11 +92,12 @@ int	ft_ten_queens_puzzle(void)
 	int	*array_buf;
 	int	*array_r;
 	int	col_min;
+	int	count;
 
 	ft_insert(array, 0, 0);
-	ft_display(array, 9);
-	write(1, "\n", 1);
+	ft_display(array);
 	col_min = 9;
+	count = 1;
 	array_r = array;
 	while (col_min >= 0)
 	{
@@ -107,18 +105,18 @@ int	ft_ten_queens_puzzle(void)
 		if (ft_recursive_check(array_buf, array_buf[9] + 1, 9, col_min))
 		{
 			array_r = array_buf;
-			ft_display(array, 9);
-			write(1, "\n", 1);
-			col_min = 9;
+			ft_display(array_r);
+			count++;
+			col_min = 1;
 		}
 		col_min--;
 	}
-	return (1);
+	return (count);
 }
 
 int	main(void)
 {
-	ft_ten_queens_puzzle();
+	printf("%i", ft_ten_queens_puzzle());
 }
 
 
