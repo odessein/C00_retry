@@ -1,11 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-//Funtion recursive_check -> Check if we can add + 1, <- vers la gauche,  without probleme with any other, then again go -> vers la droite if probleme (restart the check to the left etc (on the last valid value obviously)
-
-
-//Function Check
-//On part de 0 puis on check si on peux poser la prochaine value etc -> vers la droite
+//Check if its possible to play at a certain positon, respecting condition
 int	ft_check(int line, int col, int arr[10])
 {
 	int	i;
@@ -48,6 +44,7 @@ void	ft_display(int array[10])
 	write(1, "\n", 1);
 }
 
+//Starting by the last digit to the first to check if we found another possibilities
 int	ft_recursive_check(int array[10], int n, int col, int col_min)
 {
 	if (col > 9)
@@ -67,11 +64,9 @@ int	ft_recursive_check(int array[10], int n, int col, int col_min)
 	return ft_recursive_check(array, 0, col + 1, col_min);
 }
 
-//Classic loop (recursion usage only on the check)
-
+//On part de 0 puis on check si on peux poser la prochaine value etc -> vers la droite
 void	ft_insert(int array[10], int n, int col)
 {
-//Init **
 	if (col > 9)
 		return ;
 	while (!ft_check(n, col, array))
@@ -86,6 +81,7 @@ void	ft_insert(int array[10], int n, int col)
 	ft_insert(array, 0, col + 1);
 }
 
+//loop to find all possibilites and display those
 int	ft_ten_queens_puzzle(void)
 {
 	int	array[10];
@@ -94,10 +90,10 @@ int	ft_ten_queens_puzzle(void)
 	int	col_min;
 	int	count;
 
+	col_min = 1;
+	count = 1;
 	ft_insert(array, 0, 0);
 	ft_display(array);
-	col_min = 9;
-	count = 1;
 	array_r = array;
 	while (col_min >= 0)
 	{
@@ -118,5 +114,4 @@ int	main(void)
 {
 	printf("%i", ft_ten_queens_puzzle());
 }
-
 
